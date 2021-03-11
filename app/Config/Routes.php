@@ -63,6 +63,37 @@ $routes->get('/course', 'Course::index');
 $routes->post('/course', 'Course::createCourse');
 $routes->put('/course/(:num)', 'Course::updateCourse/$1');
 
+//Education
+$routes->post('/createEducation','Education::createEducation');
+$routes->put('/updateEducation/(:num)', 'Education::updateEducation/$1');
+$routes->delete('/deleteEducation/(:num)','Education::deletedEducation/$1');
+$routes->get('/getEducation','Education::getEducation');
+$routes->get('/Education/(:num)','Education::getEducationById/$1');
+
+//EducationDetail
+$routes->get('/eduDetail', 'eduDetail::index');
+$routes->post('/createEduDetail','eduDetail::createEduDetail');
+$routes->put('/updateEduDetail/(:num)', 'Education::updateEduDetail/$1');
+$routes->get('/getEduDetail','eduDetail::getEduDetail');
+
+$routes->post('/createEduCondition','EduCondition::createEduCondition');
+$routes->put('/updateEduCondition/(:num)', 'EduCondition::updateEduCondition/$1');
+
+//student
+$routes->get('/students', 'student::getAllStudent');
+$routes->get('/students/(:num)', 'student::getStudent/$1');
+$routes->post('/students', 'student::addStudent');
+$routes->put('/students/(:num)', 'student::updateProfileStudent/$1');
+
+$routes->get('/EducationStudent', 'EducationStudent::getAllEducation');
+$routes->get('/EducationStudent/(:num)', 'EducationStudent::getEducation/$1');
+$routes->post('/EducationStudent', 'EducationStudent::addEducationStudent');
+$routes->put('/EducationStudent/(:num)', 'EducationStudent::updateEducationStudent/$1');
+
+
+//Login
+$routes->post("/login", "Login::index");
+$routes->post("/logintwo","Login::login2");
 
 /*
  * --------------------------------------------------------------------

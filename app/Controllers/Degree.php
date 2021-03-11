@@ -26,21 +26,37 @@ class Degree extends ResourceController
 //-degree_initials : string
 
 
-        $model = new DegreeModel();
+        $degree = new DegreeModel();
         $data =[
             "id_degree"=> $this->request->getvar('id_degree'),
             "name_degree"=> $this->request->getvar('name_degree'),
             "initials_degree"=> $this->request->getvar('initials_degree')
         ];
-        $model->insert($data);
-        $response=[
-            'satatus'=>201,
-            'error'=>null,
-            'meessage'=>[
-                'success' => 'Degree create successfully'
-            ]
-        ];
+
+        $checkdegree = $degree->where('name_degree',$data['name_degree'])->first();
+
+        if ($checkdegree === null){
+            $degree->insert($data);
+            $response=[
+                'satatus'=>201,
+                'error'=>null,
+                'meessage'=>[
+                    'success' => 'เพิ่มหลักสูตรสำเร็จ !!'
+                ]
+            ];
+                return $this->respond($response);
+        } else {
+            $response = [
+                'satatus' => 202,
+                'error' => null,
+                'meessage' => [
+                    'success' => 'หลักสูตรนี้ มีข้อมูลอยู่แล้ว !!'
+                ]
+            ];
+
             return $this->respond($response);
+        }
+        
     } 
 
     public function updateDegree($id = null)

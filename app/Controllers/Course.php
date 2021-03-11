@@ -3,8 +3,7 @@ namespace App\Controllers;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\CourseModel;
-use App\Models\GroupMajorModel;
-use App\Models\DegreeModel;
+
 
 
 class Course extends ResourceController
@@ -23,14 +22,14 @@ class Course extends ResourceController
     public function index()
     {
         $couse = new CourseModel();
-        $major = new GroupMajorModel();
-        $degree = new DegreeModel();
 
-        //$major->join('group_major' , 'group_major.id_major = couse.id_major' , 'left');
-        //$degree->join('degree' , 'degree.id_degree = couse.id_degree' , 'left');
-        //$data['course'] = $couse->join('group_major' , 'group_major.id_major = couse.id_major' , 'left')->findAll();
-        $data['course'] = $couse->orderBy('id_course','DESC')->findAll();
-        return $this->respond($data);
+        $datacouse = $couse->join('group_major','group_major.id_major = course.id_major')
+        ->join('degree','degree.id_degree = course.id_degree')
+        ->select('course.*')
+        ->select('group_major.*')
+        ->select('degree.*')
+        ->orderBy('id_course','DESC')->findAll();        
+        return $this->respond($datacouse);
 
     }
 
@@ -44,15 +43,29 @@ class Course extends ResourceController
             "id_degree"=> $this->request->getvar('id_degree')
 
         ];
-        $couse->insert($data);
-        $response=[
-            'satatus'=>201,
-            'error'=>null,
-            'meessage'=>[
-                'success' => 'Course create successfully'
-            ]
-        ];
+        $checkcourse = $couse->where('name_course',$data['name_course'])->first();
+        if ($checkcourse === null){
+            $couse->insert($data);
+            $response=[
+                'satatus'=>201,
+                'error'=>null,
+                'meessage'=>[
+                    'success' => 'เพิ่มสาขาสำเร็จ !!'
+                ]
+            ];
+                return $this->respond($response);
+        } else {
+            $response = [
+                'satatus' => 202,
+                'error' => null,
+                'meessage' => [
+                    'success' => 'สาขานี้ มีข้อมูลอยู่แล้ว !!'
+                ]
+            ];
+
             return $this->respond($response);
+        }
+        
     } 
 
     public function updateCourse($id = null)
@@ -70,7 +83,7 @@ class Course extends ResourceController
             'satatus'=>201,
             'error'=>null,
             'meessage'=>[
-                'success' => 'Course create successfully'
+                'success' => 'Course Update successfully'
             ]
         ];
             return $this->respond($response);
