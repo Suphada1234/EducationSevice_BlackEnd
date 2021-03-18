@@ -60,31 +60,32 @@ class Education extends ResourceController
 
     public function updateEducation($id = null)
     {
-        $model = new EducationModel();
-        $educationdata =[
-            "year_edu"=> $this->request->getVar('year_edu'),
-           "id_round"=> $this->request->getVar('id_round'),
-           "id_university"=> $this->request->getVar('id_university'),
-           "tcas"=> $this->request->getVar('tcas'),
-           "open_date"=> $this->request->getVar('open_date'),
-           "close_date"=> $this->request->getVar('close_date'),
-           "list_day"=> $this->request->getVar('list_day'),
-           "general"=> $this->request->getVar('general'),
-           "doculment_edu"=> $this->request->getVar('doculment_edu'),
-           "note_edu"=> $this->request->getVar('note_edu'),
-           "file_doculment"=> $this->request->getVar('file_doculment'),
-           "url_doculment"=> $this->request->getVar('url_doculment'),
-           "id_schedule"=> $this->request->getVar('id_schedule')
-        ];
-        $model->update($id, $educationdata);
-        $response=[
-            'satatus'=>201,
-            'error'=>null,
-            'meessage'=>[
-                'success' => 'Educcation create successfully'
-            ]
-        ];
-            return $this->respond($response);
+       $model = new EducationModel();
+       $dataedu = [
+        "year_edu" => $this->request->getVar('year_edu'),
+        "id_round" => $this->request->getVar('id_round'),
+        "id_university" => $this->request->getVar('id_university'),
+        "tcas" => $this->request->getVar('tcas'),
+        "open_date" => $this->request->getVar('open_date'),
+        "close_date" => $this->request->getVar('close_date'),
+        "list_day" => $this->request->getVar('list_day'),
+        "general" => $this->request->getVar('general'),
+        "doculment_edu" => $this->request->getVar('doculment_edu'),
+        "note_edu" => $this->request->getVar('note_edu'),
+        "url_doculment" => $this->request->getVar('url_doculment'),
+        "id_schedule" => $this->request->getVar('id_schedule')
+       ];
+
+       $model->update($id,$dataedu);
+       $response = [
+        'satatus' => 201,
+        'error' => null,
+        'meessage' => [
+            'success' => 'อัปเดตข้อมูลการศึกษาต่อสำเร็จ !!'
+        ]
+    ];
+    return $this->respond($response);
+
     } 
   
     public function deletedEducation($id = null){

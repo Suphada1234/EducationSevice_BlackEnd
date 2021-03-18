@@ -4,8 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class EducationModel extends Model{
-    protected $table = 'edu_stu';
-    protected $primaryKey = 'id_edu_stu' ;
-    protected $allowedFields = ['id_edu_stu','id_stu','id_university','id_faculty','id_course','id_major'];
+class EducationModel extends Model
+{
+    protected $table = 'education';
+    protected $primarykey = 'id_education';
+    protected $allowedFields = [ 'year_edu', 'id_round', 'id_university', 'tcas', 'open_date', 'close_date', 'list_day', 'general', 'doculment_edu', 'note_edu', 'url_doculment']; 
 }
