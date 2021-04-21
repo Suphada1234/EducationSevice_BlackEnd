@@ -21,6 +21,18 @@ class GroupMajor extends ResourceController
         return $this->respond($data);
     }
 
+    public function getGroupMajor($id = null){
+
+        $major = new GroupMajorModel();
+        $data = $major->where('id_major',$id)->first();
+        if($data){
+            return $this->respond($data);
+        }else{
+            return $this->failNotFound('No Product Found');
+        }
+
+    }
+
     public function createGroupMajor()
     {
 

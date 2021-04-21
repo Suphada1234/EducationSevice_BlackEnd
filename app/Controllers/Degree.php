@@ -19,6 +19,18 @@ class Degree extends ResourceController
         return $this->respond($data);
     }
 
+    public function getDegree($id = null){
+
+        $model = new DegreeModel();
+        $data = $model->where('id_degree',$id)->first();
+        if($data){
+            return $this->respond($data);
+        }else{
+            return $this->failNotFound('No Product Found');
+        }
+
+    }
+
     public function createDegree(){
 
 //-degree_id : int

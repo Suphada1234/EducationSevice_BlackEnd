@@ -21,6 +21,18 @@ class University extends ResourceController
         return $this->respond($data);
     }
 
+    public function getUniversity($id = null){
+        $uni = new UniversityModel();
+        $data = $uni->where('id_university',$id)->first();
+        if($data){
+            return $this->respond($data);
+        }else{
+            return $this->failNotFound('No Product Found');
+        }
+
+    }
+
+
     public function createUniversity()
     {
         //-university_id: int

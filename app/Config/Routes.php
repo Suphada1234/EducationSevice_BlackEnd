@@ -37,29 +37,34 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-//University
+//University 
 $routes->get('/university', 'University::index');
+$routes->get('/university/(:num)', 'University::getUniversity/$1');
 $routes->post('/university', 'University::createUniversity');
 $routes->put('/university/(:num)', 'University::updateUniversity/$1');
 //$routes->get('/university/(:text)', 'University::searchUniversity/$keyword');
 
 //Faculty
 $routes->get('/faculty', 'Faculty::index');
+$routes->get('/faculty/(:num)', 'Faculty::getFaculty/$1');
 $routes->post('/faculty', 'Faculty::createFaculty');
 $routes->put('/faculty/(:num)', 'Faculty::updateFaculty/$1');
 
 //Group Major
 $routes->get('/groupmajor', 'GroupMajor::index');
+$routes->get('/groupmajor/(:num)', 'GroupMajor::getGroupMajor/$1');
 $routes->post('/groupmajor', 'GroupMajor::createGroupMajor');
 $routes->put('/groupmajor/(:num)', 'GroupMajor::updateGroupMajor/$1');
 
 //Degree
 $routes->get('/degree', 'Degree::index');
+$routes->get('/degree/(:num)', 'Degree::getDegree/$1');
 $routes->post('/degree', 'Degree::createDegree');
 $routes->put('/degree/(:num)', 'Degree::updateDegree/$1');
 
 //Course
 $routes->get('/course', 'Course::index');
+$routes->get('/course/(:num)', 'Course::getCouse/$1');
 $routes->post('/course', 'Course::createCourse');
 $routes->put('/course/(:num)', 'Course::updateCourse/$1');
 

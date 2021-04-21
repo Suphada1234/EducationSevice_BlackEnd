@@ -33,6 +33,25 @@ class Course extends ResourceController
 
     }
 
+    public function getCouse($id = null){
+
+        $couse = new CourseModel();
+        $datacouse = $couse->join('group_major','group_major.id_major = course.id_major')
+        ->join('degree','degree.id_degree = course.id_degree')
+        ->select('course.*')
+        ->select('group_major.*')
+        ->select('degree.*')
+        ->orderBy('id_course','DESC')->findAll();
+        
+        $data = $datacouse->where('id_course',$id);
+        if($data){
+            return $this->respond($data);
+        }else{
+            return $this->failNotFound('No Product Found');
+        }
+
+    }
+
     public function createCourse(){
 
         $couse = new CourseModel();

@@ -20,6 +20,18 @@ class Faculty extends ResourceController
         return $this->respond($data);
     }
 
+    public function getFaculty($id = null){
+
+        $model = new FacultyModel();
+        $data = $model->where('id_Faculty',$id)->first();
+        if($data){
+            return $this->respond($data);
+        }else{
+            return $this->failNotFound('No Product Found');
+        }
+
+    }
+
     public function createFaculty()
     {
         //-faculty_id : int
@@ -31,7 +43,7 @@ class Faculty extends ResourceController
             "name_faculty" => $this->request->getvar('name_faculty')
         ];
 
-        $checkfac = $faculty->where('name');
+        $checkfac = $faculty->where('name',$data['name_faculty'])->first();
         if ($checkfac === null) {
             $faculty->insert($data);
             $response = [
@@ -43,7 +55,7 @@ class Faculty extends ResourceController
             ];
         } else{
             $response = [
-                'satatus' => 201,
+                'satatus' => 202,
                 'error' => null,
                 'meessage' => [
                     'success' => 'คณะนี้มีข้อมูลอยู่แล้ว'
